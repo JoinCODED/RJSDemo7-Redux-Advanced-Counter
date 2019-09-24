@@ -123,6 +123,55 @@
     ...
     ```
 
-# End of "starting-point" branch
+# Tidying Up!
 
-# Switch to "with-redux" branch to demo Advanced Redux
+1. Inside the `store`, create `actions` folder. Inside `actions`:
+
+   - `actionTypes.js`
+   - `counter.js`
+   - `color.js`
+   - `index.js`
+
+2. inside `actions/actionTypes.js` - keeping a single source of action strings to avoid typos and to increate organization:
+
+   ```javascript
+   export const INCREMENT = "INCREMENT";
+   export const CHANGE_COLOR = "CHANGE_COLOR";
+   ```
+
+3. Setup the individual action files. By importing their action types and copying over thier functions:
+
+   `counter.js`
+
+   ```javascript
+   import { INCREMENT } from "./actionTypes";
+
+   export const increment = step => {
+     return {
+       type: INCREMENT,
+       payload: step
+     };
+   };
+   ```
+
+   `color.js`
+
+   ```javascript
+   import { CHANGE_COLOR } from "./actionTypes";
+
+   export const changeColor = color => {
+     return {
+       type: CHANGE_COLOR,
+       payload: color
+     };
+   };
+   ```
+
+4. In `actions/index.js` combine the exporting of all of our actions from the seperate action files:
+
+   ```javascript
+   export { increment } from "./counter";
+   export { changeColor } from "./color";
+   ```
+
+5. Restart the server if a module not found error is present...
