@@ -9,13 +9,13 @@ import { changeColor } from "./stores/actions";
 
 function ColorSelector(props) {
   const colorButtons = colors.map(color => {
-    const size = 10;
+    const height = 10;
     return (
       <div
         key={color}
         className="btn"
         onClick={() => props.changeColor(color)}
-        style={{ backgroundColor: color, height: size, width: size }}
+        style={{ backgroundColor: color, height: height }}
       />
     );
   });
