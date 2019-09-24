@@ -132,16 +132,28 @@
    - `color.js`
    - `index.js`
 
-2. inside `actions/actionTypes.js` - keeping a single source of action strings to avoid typos and to increate organization:
+2. Copy over the action functions from `actions.js` to `counter.js` and `color.js`.
+
+3. In `actions/index.js` combine the exporting of all of our actions from the seperate action files:
+
+   ```javascript
+   export { increment } from "./counter";
+   export { changeColor } from "./color";
+   ```
+
+   You should be able to delete `actions.js` now.
+   Restart the server if a "module not found error" is present.
+
+4. inside `actions/actionTypes.js` - keeping a single source of action strings to avoid typos and to increate organization:
 
    ```javascript
    export const INCREMENT = "INCREMENT";
    export const CHANGE_COLOR = "CHANGE_COLOR";
    ```
 
-3. Setup the individual action files. By importing their action types and copying over thier functions:
+5. Import the action types into their respective files and use them:
 
-   `counter.js`
+   `actions/counter.js`
 
    ```javascript
    import { INCREMENT } from "./actionTypes";
@@ -154,7 +166,7 @@
    };
    ```
 
-   `color.js`
+   `actions/color.js`
 
    ```javascript
    import { CHANGE_COLOR } from "./actionTypes";
@@ -167,11 +179,50 @@
    };
    ```
 
-4. In `actions/index.js` combine the exporting of all of our actions from the seperate action files:
+6. Also import and use the action types in the reducers:
+
+   `reducers/counter.js`
 
    ```javascript
-   export { increment } from "./counter";
-   export { changeColor } from "./color";
+   import { INCREMENT } from "../actions/actionTypes"; // Step 1
+
+   const initialState = {
+     counter: 0
+   };
+
+   const reducer = (state = initialState, action) => {
+     switch (action.type) {
+       case INCREMENT: // Step 2
+         return {
+           ...state,
+           counter: state.counter + action.payload
+         };
+       default:
+         return state;
+     }
+   };
    ```
 
-5. Restart the server if a module not found error is present...
+   `reducers/color.js`
+
+   ```javascript
+   import { CHANGE_COLOR } from "../actions/actionTypes"; // Step 1
+
+   const initialState = {
+     color: "white"
+   };
+
+   export default (state = initialState, action) => {
+     switch (action.type) {
+       case CHANGE_COLOR: // Step 2
+         return {
+           ...state,
+           color: action.payload
+         };
+       default:
+         return state;
+     }
+   };
+   ```
+
+7. Show that you now only need to edit the string in one place.
