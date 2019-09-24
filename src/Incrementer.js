@@ -18,7 +18,7 @@ const Incrementer = props => {
 
   return (
     <div className="col-lg-6 my-2">
-      <div className="component">
+      <div className="component" style={{ backgroundColor: props.color }}>
         <p>
           {prefix.toUpperCase()}REMENTER by {Math.abs(step)}
         </p>
@@ -42,7 +42,8 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
   return {
-    counter: state.counter
+    counter: state.counterState.counter,
+    color: state.colorState.color
   };
 };
 
