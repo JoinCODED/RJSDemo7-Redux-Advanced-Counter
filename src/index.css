@@ -12,9 +12,11 @@
 
 .component {
   width: 350px;
-  height: 500px;
+  height: 100%;
   border: 2px solid;
+  border-radius: 20px;
   margin: auto;
+  padding: 30px;
   text-align: center;
   color: black;
   background-color: white;
