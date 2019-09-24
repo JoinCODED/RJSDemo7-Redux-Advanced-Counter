@@ -1,5 +1,5 @@
 const INCREMENT = "INCREMENT";
-const DECREMENT = "DECREMENT";
+const CHANGE_COLOR = "CHANGE_COLOR";
 
 export const increment = step => {
   return {
@@ -8,8 +8,9 @@ export const increment = step => {
   };
 };
 
-export const decrement = () => {
+export const changeColor = color => {
   return {
-    type: DECREMENT
+    type: CHANGE_COLOR,
+    payload: color
   };
 };
