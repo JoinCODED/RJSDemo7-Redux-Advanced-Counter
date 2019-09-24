@@ -5,17 +5,29 @@ import { connect } from "react-redux";
 import { increment } from "./stores/actions";
 
 function Incrementer(props) {
-  return (
-    <div className="col-lg-6">
+  const step = props.step;
+
+  const prefix = step > 0 ? "Inc" : "Dec";
+
+  if (!step)
+    return (
       <div className="component">
-        <p>INCREMENTER</p>
+        <p>I DO NOTHING</p>
+      </div>
+    );
+
+  return (
+    <div className="col-lg-6 my-2">
+      <div className="component">
+        <p>
+          {prefix.toUpperCase()}REMENTER by {Math.abs(step)}
+        </p>
         <p>{props.counter}</p>
-        <p>{props.copyMe}</p>
         <button
           className="btn btn-lg btn-outline-dark"
-          onClick={props.incrementCounter}
+          onClick={() => props.incrementCounter(step)}
         >
-          Increment
+          {prefix}rement
         </button>
       </div>
     </div>
@@ -24,7 +36,7 @@ function Incrementer(props) {
 
 const mapDispatchToProps = dispatch => {
   return {
-    incrementCounter: () => dispatch(increment(1))
+    incrementCounter: step => dispatch(increment(step))
   };
 };
 
