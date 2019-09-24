@@ -30,8 +30,7 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
   return {
-    counter: state.counter,
-    copyMe: state.copyMe
+    counter: state.counter
   };
 };
 

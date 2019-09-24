@@ -1,6 +1,5 @@
 const initialState = {
-  copyMe: "Remember to copy me!",
-  counter: 300
+  counter: 0
 };
 
 const reducer = (state = initialState, action) => {
