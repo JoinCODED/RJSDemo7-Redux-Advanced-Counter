@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import colors from "./colors";
 
 // Actions
-import { changeColor } from "./stores/actions";
+import { changeColor } from "./redux/actions";
 
 function ColorSelector(props) {
   const colorButtons = colors.map(color => {
