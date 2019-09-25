@@ -25,9 +25,9 @@
 
 1.  Do a quick walk through of the code. Explain that the `ColorSelector` is going to change the color of the cards. Explain why this is a completely separate kind of state, unrelated to counter. Give other examples if you can.
 
-2.  Create a `reducers` folder. Move `reducer.js` here and rename it `counter.js`.
+2.  Create a `redux/reducers` folder. Move `reducer.js` here and rename it `counter.js`.
 
-3.  Create a `store/reducers/color.js`:
+3.  Create a `redux/reducers/color.js`:
 
     ```javascript
     const initialState = {
@@ -64,15 +64,27 @@
     export default rootReducer;
     ```
 
-5.  Now, in the main `index.js`, import the root reducer:
+5.  Add a `redux/index.js` file which takes the store composition from the main `index.js` and returns a `store`:
+
+    ```javascript
+    import { createStore, compose } from "redux";
+
+    import reducer from "./reducers";
+
+    const composeEnhancers =
+      window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+    const store = createStore(reducer, composeEnhancers());
+
+    export default store;
+    ```
+
+6.  Now, in the main `index.js`, import the store:
 
     ```javascript
     import { Provider } from "react-redux";
 
-    import { createStore } from "redux";
-    import reducer from "./store/reducers"; // STEP 1
-
-    const store = createStore(reducer); //STEP 4
+    import store from "./redux"; // STEP 1
 
     ReactDOM.render(
       <Provider store={store}>
@@ -83,7 +95,7 @@
     registerServiceWorker();
     ```
 
-6.  Back in `Incrementer.js`, remap the `mapStateToProps`:
+7.  Back in `Incrementer.js`, remap the `mapStateToProps`:
 
     ```javascript
     const mapStateToProps = state => {
@@ -94,13 +106,13 @@
     };
     ```
 
-7.  Use the color to change the background color:
+8.  Use the color to change the background color:
 
     ```jsx
     <div className="component" style={{ backgroundColor: props.color }}>
     ```
 
-8.  BONUS - use the color in `ColorSelector` to highlight the current color button:
+9.  BONUS - use the color in `ColorSelector` to highlight the current color button:
 
     ```jsx
     const colorButtons = colors.map(color => {
