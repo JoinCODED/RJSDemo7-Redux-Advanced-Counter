@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 // Actions
-import { changeColor } from "./redux/actionCreators";
+import { changeColor } from "./redux/actions";
 
 const ColorButton = props => {
   const color = props.color;

@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 // Actions
-import { increment } from "./redux/actionCreators";
+import { increment } from "./redux/actions";
 
 const Incrementer = props => {
   const step = props.step;
