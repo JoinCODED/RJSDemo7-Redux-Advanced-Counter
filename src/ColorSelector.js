@@ -1,38 +1,16 @@
 import React from "react";
-import { connect } from "react-redux";
 
 // Data
 import colors from "./colors";
 
-// Actions
-import { changeColor } from "./redux/actions";
+// Components
+import ColorButton from "./ColorButton";
 
-function ColorSelector(props) {
-  const colorButtons = colors.map(color => {
-    const height = 10;
-    return (
-      <div
-        key={color}
-        className="btn"
-        onClick={() => props.changeColor(color)}
-        style={{ backgroundColor: color, height: height }}
-      />
-    );
-  });
+const ColorSelector = () => {
+  const colorButtons = colors.map(color => (
+    <ColorButton key={color} color={color} />
+  ));
   return <div className="col-lg-6 btn-group m-5">{colorButtons}</div>;
-}
-
-const mapStateToProps = state => {
-  return {};
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    changeColor: color => dispatch(changeColor(color))
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ColorSelector);
+export default ColorSelector;

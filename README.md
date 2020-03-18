@@ -48,7 +48,7 @@
     export default reducer;
     ```
 
-4.  In `stores/reducers/index.js`, combine and export the reducers:
+4.  In `redux/reducers/index.js`, combine and export the reducers:
 
     ```javascript
     import { combineReducers } from "redux"; //STEP 1
@@ -108,15 +108,19 @@
 
 8.  Use the color to change the background color:
 
+    `Incrementer.js`
+
     ```jsx
     <div className="component" style={{ backgroundColor: props.color }}>
     ```
 
-9.  BONUS - use the color in `ColorSelector` to highlight the current color button:
+9.  BONUS - use the color in `ColorButton.js` to highlight the current color button:
 
     ```jsx
-    const colorButtons = colors.map(color => {
-      const height = color === props.color ? 20 : 10; // STEP 2
+    const ColorButton = props => {
+      const color = props.color;
+      const isCurrent = color === props.currentColor;
+      const height = isCurrent ? 20 : 10;
       return (
         <div
           key={color}
@@ -125,11 +129,60 @@
           style={{ backgroundColor: color, height: height }}
         />
       );
-    });
+    };
     ...
     const mapStateToProps = state => {
       return {
-        color: state.colorState.color // STEP 1
+        currentColor: state.colorState.color // STEP 1
+      };
+    };
+    ...
+    ```
+
+10. MEGABONUS - show the power of `mapStateToProps`:
+
+    ```jsx
+    const ColorButton = props => {
+      const color = props.color;
+      const height = props.isCurrent ? 20 : 10;
+      return (
+        <div
+          key={color}
+          className="btn"
+          onClick={() => props.changeColor(color)}
+          style={{ backgroundColor: color, height: height }}
+        />
+      );
+    };
+    ...
+    const mapStateToProps = (state, ownProps) => {
+      return {
+        isCurrent: state.colorState.color === ownProps.color// STEP 1
+      };
+    };
+    ...
+    ```
+
+    OR EVEN
+
+    ```jsx
+    const ColorButton = props => {
+      const color = props.color;
+      const height = props.height
+      return (
+        <div
+          key={color}
+          className="btn"
+          onClick={() => props.changeColor(color)}
+          style={{ backgroundColor: color, height: height }}
+        />
+      );
+    };
+    ...
+    const mapStateToProps = (state, ownProps) => {
+      const isCurrent = state.colorState.color === ownProps.color
+      return {
+        height: isCurrent ? 20 : 10
       };
     };
     ...

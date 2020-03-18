@@ -2,9 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 
 // Actions
-import { increment } from "./redux/actions";
+import { increment } from "./redux/actionCreators";
 
-function Incrementer(props) {
+const Incrementer = props => {
   const step = props.step;
 
   const prefix = step > 0 ? "Inc" : "Dec";
@@ -32,7 +32,7 @@ function Incrementer(props) {
       </div>
     </div>
   );
-}
+};
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -46,7 +46,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Incrementer);
+export default connect(mapStateToProps, mapDispatchToProps)(Incrementer);
