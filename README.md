@@ -190,14 +190,14 @@
 
 # Tidying Up!
 
-1. Inside the `store`, create `actions` folder. Inside `actions`:
+1. Inside the `redux` directory, create `actions` folder. Inside `actions`:
 
    - `actionTypes.js`
    - `counter.js`
    - `color.js`
    - `index.js`
 
-2. Copy over the action functions from `actions.js` to `counter.js` and `color.js`.
+2. Copy over the action functions from `actionCreators.js` to `counter.js` and `color.js`.
 
 3. In `actions/index.js` combine the exporting of all of our actions from the seperate action files:
 
@@ -209,7 +209,7 @@
    You should be able to delete `actions.js` now.
    Restart the server if a "module not found error" is present.
 
-4. inside `actions/actionTypes.js` - keeping a single source of action strings to avoid typos and to increate organization:
+4. inside `actions/actionTypes.js` - keeping a single source of action strings to avoid typos and to improve organization:
 
    ```javascript
    export const INCREMENT = "INCREMENT";
@@ -289,5 +289,3 @@
      }
    };
    ```
-
-7. Show that you now only need to edit the string in one place.
